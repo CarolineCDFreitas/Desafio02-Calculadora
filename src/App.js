@@ -5,12 +5,13 @@ export default function App() {
   const [primeiroValor, setPrimeiroValor] = useState("");
   const [segundoValor, setSegundoValor] = useState("");
   const [resultado, setResultado] = useState("");
+  const [entradaValida, setEntradaValida] = useState(false);
 
-//TODO: (outras possibilidades de verificação)
-//[] Aprender Regex;
+  //TODO: (outras possibilidades de verificação)
+  //[] Aprender Regex;
 
   //função genérica para capturar, filtrar e verificar esses valores, e a seubsequente conversão em número desses valores
-  const capturandoValores = (e, setValor) => {
+  const capturandoValores = (e, setValor, outroValor) => {
     const valor = e.target.value;
 
     //método para filtrar os valores. Necessário por conta do type="text", para evitar NaN;
@@ -22,14 +23,16 @@ export default function App() {
     const valorFiltrado = ehNumero.length > 0 ? Number(ehNumero.join("")) : "";
 
     setValor(valorFiltrado);
+
+    setEntradaValida(valorFiltrado !== "" && outroValor !== "");
   };
 
   const capturandoPrimeiroValor = (e) => {
-    capturandoValores(e, setPrimeiroValor);
+    capturandoValores(e, setPrimeiroValor, setSegundoValor);
   };
 
   const capturandoSegundoValor = (e) => {
-    capturandoValores(e, setSegundoValor);
+    capturandoValores(e, setPrimeiroValor, setSegundoValor);
   };
 
   //funções que realizam as operações aritméticas e depois convertem os resultados para strings
@@ -67,6 +70,7 @@ export default function App() {
     setPrimeiroValor("");
     setSegundoValor("");
     setResultado("");
+    setEntradaValida(true);
   };
 
   return (
@@ -91,11 +95,21 @@ export default function App() {
       </S.ConteinerInput>
       <S.ConteinerButton>
         <S.Button onClick={handleClear}>C</S.Button>
-        <S.Button onClick={soma}>+</S.Button>
-        <S.Button onClick={subtracao}>-</S.Button>
-        <S.Button onClick={multiplicacao}>x</S.Button>
-        <S.Button onClick={divisao}>/</S.Button>
-        <S.Button onClick={porcentagem}>%</S.Button>
+        <S.Button onClick={soma} disabled={!entradaValida}>
+          +
+        </S.Button>
+        <S.Button onClick={subtracao} disabled={!entradaValida}>
+          -
+        </S.Button>
+        <S.Button onClick={multiplicacao} disabled={!entradaValida}>
+          x
+        </S.Button>
+        <S.Button onClick={divisao} disabled={!entradaValida}>
+          /
+        </S.Button>
+        <S.Button onClick={porcentagem} disabled={!entradaValida}>
+          %
+        </S.Button>
       </S.ConteinerButton>
       <S.Resultado>{resultado}</S.Resultado>
     </S.Main>
