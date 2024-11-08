@@ -6,16 +6,19 @@ export default function App() {
   const [segundoValor, setSegundoValor] = useState("");
   const [resultado, setResultado] = useState("");
 
-  //função genérica para conter a lógica junto com o filtro, a verificação desse filtro e a seubsequente conversão em número
+//TODO: (outras possibilidades de verificação)
+//[] Aprender Regex;
+
+  //função genérica para capturar, filtrar e verificar esses valores, e a seubsequente conversão em número desses valores
   const capturandoValores = (e, setValor) => {
     const valor = e.target.value;
 
-    //método para filtrar os valores. necessário por conta do type="text", para evitar NaN;
+    //método para filtrar os valores. Necessário por conta do type="text", para evitar NaN;
     const ehNumero = [...valor].filter(
       (caracteres) => !isNaN(caracteres) && caracteres !== ""
     );
 
-    //condicional para verificar se tem número, e se sim juntaá-los e convertê-los em números para as operações aritméticas.
+    //condicional para verificar se tem número, e, se sim, juntá-los e convertê-los em números para as operações aritméticas.
     const valorFiltrado = ehNumero.length > 0 ? Number(ehNumero.join("")) : "";
 
     setValor(valorFiltrado);
@@ -29,7 +32,7 @@ export default function App() {
     capturandoValores(e, setSegundoValor);
   };
 
-  //funções que fazem as operações e depois convertem os resultados para strings
+  //funções que realizam as operações aritméticas e depois convertem os resultados para strings
   const soma = () => {
     const resultadoSoma = primeiroValor + segundoValor;
     setResultado(String(resultadoSoma));

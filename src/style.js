@@ -59,6 +59,7 @@ export const Titulo = styled.h1`
   color: #48346e;
   text-align: center;
   text-shadow: 2px 2px 5px #f5fbe0;
+  margin: 0.2em;
 `;
 
 export const Input = styled.input`
