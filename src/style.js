@@ -81,7 +81,7 @@ export const Resultado = styled.p`
   font-size: 2rem;
   text-align: center;
   margin: 0.5em;
-  min-height: 3rem;
+  height: 2rem;
 `;
 
 export const Button = styled.button`
@@ -97,14 +97,15 @@ export const Button = styled.button`
   box-shadow: 0 5px #999;
 
   &:active {
-    background-color: #d4f285;
+    background-color: #9c4d97;
     box-shadow: 0 4px #666;
     transform: translateY(4px);
   }
 
   @media (min-width: 1024px) {
     &:hover {
-      background-color: #d4f285;
+      background-color: #6a2c8b;
+      color: #e6c8ff;
     }
   }
 `;

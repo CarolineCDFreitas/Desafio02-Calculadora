@@ -1,17 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as S from "./style";
 
 export default function App() {
   const [primeiroValor, setPrimeiroValor] = useState("");
   const [segundoValor, setSegundoValor] = useState("");
   const [resultado, setResultado] = useState("");
-  const [entradaValida, setEntradaValida] = useState(false);
+  const [botaoDesabilitado, setbotaoDesabilitado] = useState(true);
 
   //TODO: (outras possibilidades de verificação)
   //[] Aprender Regex;
+  //[] Desabilitar os botões com verificação dos valores de entrada!!
 
   //função genérica para capturar, filtrar e verificar esses valores, e a seubsequente conversão em número desses valores
-  const capturandoValores = (e, setValor, outroValor) => {
+  const capturandoValores = (e, setValor) => {
     const valor = e.target.value;
 
     //método para filtrar os valores. Necessário por conta do type="text", para evitar NaN;
@@ -23,17 +24,21 @@ export default function App() {
     const valorFiltrado = ehNumero.length > 0 ? Number(ehNumero.join("")) : "";
 
     setValor(valorFiltrado);
-
-    setEntradaValida(valorFiltrado !== "" && outroValor !== "");
   };
 
   const capturandoPrimeiroValor = (e) => {
-    capturandoValores(e, setPrimeiroValor, setSegundoValor);
+    capturandoValores(e, setPrimeiroValor);
   };
 
   const capturandoSegundoValor = (e) => {
-    capturandoValores(e, setPrimeiroValor, setSegundoValor);
+    capturandoValores(e, setSegundoValor);
   };
+
+  useEffect(() => {
+    primeiroValor !== "" && segundoValor !== ""
+      ? setbotaoDesabilitado(false)
+      : setbotaoDesabilitado(true);
+  });
 
   //funções que realizam as operações aritméticas e depois convertem os resultados para strings
   const soma = () => {
@@ -70,7 +75,6 @@ export default function App() {
     setPrimeiroValor("");
     setSegundoValor("");
     setResultado("");
-    setEntradaValida(true);
   };
 
   return (
@@ -81,33 +85,38 @@ export default function App() {
         <S.Input
           type="text"
           inputMode="numeric"
+          name="primeiro input"
           value={primeiroValor}
           placeholder="Digite o primeiro número"
           onChange={capturandoPrimeiroValor}
+          autoFocus
+          autoComplete="off"
         />
         <S.Input
           type="text"
           inputMode="numeric"
+          name="segundo input"
           value={segundoValor}
           placeholder="Digite o segundo número"
           onChange={capturandoSegundoValor}
+          autoComplete="off"
         />
       </S.ConteinerInput>
       <S.ConteinerButton>
         <S.Button onClick={handleClear}>C</S.Button>
-        <S.Button onClick={soma} disabled={!entradaValida}>
+        <S.Button onClick={soma} disabled={botaoDesabilitado}>
           +
         </S.Button>
-        <S.Button onClick={subtracao} disabled={!entradaValida}>
+        <S.Button onClick={subtracao} disabled={botaoDesabilitado}>
           -
         </S.Button>
-        <S.Button onClick={multiplicacao} disabled={!entradaValida}>
+        <S.Button onClick={multiplicacao} disabled={botaoDesabilitado}>
           x
         </S.Button>
-        <S.Button onClick={divisao} disabled={!entradaValida}>
+        <S.Button onClick={divisao} disabled={botaoDesabilitado}>
           /
         </S.Button>
-        <S.Button onClick={porcentagem} disabled={!entradaValida}>
+        <S.Button onClick={porcentagem} disabled={botaoDesabilitado}>
           %
         </S.Button>
       </S.ConteinerButton>
