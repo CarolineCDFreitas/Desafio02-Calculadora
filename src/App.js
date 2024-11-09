@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import * as S from "./style";
 
 export default function App() {
@@ -34,40 +34,46 @@ export default function App() {
     capturandoValores(e, setSegundoValor);
   };
 
-  useEffect(() => {
-    primeiroValor !== "" && segundoValor !== ""
-      ? setbotaoDesabilitado(false)
-      : setbotaoDesabilitado(true);
-  });
-
   //funções que realizam as operações aritméticas e depois convertem os resultados para strings
   const soma = () => {
-    const resultadoSoma = primeiroValor + segundoValor;
-    setResultado(String(resultadoSoma));
+    if (primeiroValor !== "" && segundoValor !== "") {
+      const resultadoSoma = Number(primeiroValor) + Number(segundoValor);
+      setResultado(String(resultadoSoma));
+    }
   };
 
   const subtracao = () => {
-    const resultadoSubtracao = primeiroValor - segundoValor;
-    setResultado(String(resultadoSubtracao));
+    if (primeiroValor !== "" && segundoValor !== "") {
+      const resultadoSubtracao = Number(primeiroValor) - Number(segundoValor);
+      setResultado(String(resultadoSubtracao));
+    }
   };
 
   const multiplicacao = () => {
-    const resultadoMultiplicacao = primeiroValor * segundoValor;
-    setResultado(String(resultadoMultiplicacao));
+    if (primeiroValor !== "" && segundoValor !== "") {
+      const resultadoMultiplicacao =
+        Number(primeiroValor) * Number(segundoValor);
+      setResultado(String(resultadoMultiplicacao));
+    }
   };
 
   //verficação do segundo valor, caso contrário qualquer número dividido por 0 dá como resultado Infinity
   const divisao = () => {
-    const resultadoDivisao = primeiroValor / segundoValor;
-    segundoValor === 0
-      ? (alert("Não é possível dividir por 0."), handleClear())
-      : setResultado(String(resultadoDivisao));
+    if (primeiroValor !== "" && segundoValor !== "") {
+      const resultadoDivisao = Number(primeiroValor) / Number(segundoValor);
+      segundoValor === 0
+        ? (alert("Não é possível dividir por 0."), handleClear())
+        : setResultado(String(resultadoDivisao));
+    }
   };
 
   //função adicional para realizar a operação de porcentagem
   const porcentagem = () => {
-    const resultadoPorcentagem = (primeiroValor * segundoValor) / 100;
-    setResultado(String(resultadoPorcentagem));
+    if (primeiroValor !== "" && segundoValor !== "") {
+      const resultadoPorcentagem =
+        (Number(primeiroValor) * Number(segundoValor)) / 100;
+      setResultado(String(resultadoPorcentagem));
+    }
   };
 
   //função adicional que reseta os campos indicados
@@ -104,21 +110,11 @@ export default function App() {
       </S.ConteinerInput>
       <S.ConteinerButton>
         <S.Button onClick={handleClear}>C</S.Button>
-        <S.Button onClick={soma} disabled={botaoDesabilitado}>
-          +
-        </S.Button>
-        <S.Button onClick={subtracao} disabled={botaoDesabilitado}>
-          -
-        </S.Button>
-        <S.Button onClick={multiplicacao} disabled={botaoDesabilitado}>
-          x
-        </S.Button>
-        <S.Button onClick={divisao} disabled={botaoDesabilitado}>
-          /
-        </S.Button>
-        <S.Button onClick={porcentagem} disabled={botaoDesabilitado}>
-          %
-        </S.Button>
+        <S.Button onClick={soma}>+</S.Button>
+        <S.Button onClick={subtracao}>-</S.Button>
+        <S.Button onClick={multiplicacao}>x</S.Button>
+        <S.Button onClick={divisao}>/</S.Button>
+        <S.Button onClick={porcentagem}>%</S.Button>
       </S.ConteinerButton>
       <S.Resultado>{resultado}</S.Resultado>
     </S.Main>
