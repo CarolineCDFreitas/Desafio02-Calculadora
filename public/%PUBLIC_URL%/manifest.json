@@ -1,0 +1,7 @@
+{
+    "name": "Calculadora",
+  "short_name": "Calc",
+  "description": "Uma simples calculadora",
+  "start_url": "/",
+  "display": "standalone"
+}
