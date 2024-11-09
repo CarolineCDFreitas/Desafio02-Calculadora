@@ -5,11 +5,10 @@ export default function App() {
   const [primeiroValor, setPrimeiroValor] = useState("");
   const [segundoValor, setSegundoValor] = useState("");
   const [resultado, setResultado] = useState("");
-  const [botaoDesabilitado, setbotaoDesabilitado] = useState(true);
 
   //TODO: (outras possibilidades de verificação)
   //[] Aprender Regex;
-  //[] Desabilitar os botões com verificação dos valores de entrada!!
+  //[x] Desabilitar os botões com verificação dos valores de entrada!!
 
   //função genérica para capturar, filtrar e verificar esses valores, e a seubsequente conversão em número desses valores
   const capturandoValores = (e, setValor) => {
@@ -34,7 +33,7 @@ export default function App() {
     capturandoValores(e, setSegundoValor);
   };
 
-  //funções que realizam as operações aritméticas e depois convertem os resultados para strings
+  //funções que validam os valores, realizam as operações aritméticas e depois convertem os resultados para strings
   const soma = () => {
     if (primeiroValor !== "" && segundoValor !== "") {
       const resultadoSoma = Number(primeiroValor) + Number(segundoValor);

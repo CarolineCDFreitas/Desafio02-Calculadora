@@ -77,7 +77,7 @@ export const Input = styled.input`
   }
 `;
 
-export const Resultado = styled.p`
+export const Resultado = styled.output`
   font-size: 2rem;
   text-align: center;
   margin: 0.5em;
