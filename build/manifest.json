@@ -1,5 +1,6 @@
 {
-    "name": "Calculadora",
+  "name": "Calculadora",
+  "homepage" : ".",
   "short_name": "Calc",
   "description": "Uma simples calculadora",
   "start_url": "/",
