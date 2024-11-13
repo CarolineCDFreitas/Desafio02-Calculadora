@@ -107,6 +107,7 @@ export default function App() {
           placeholder="Digite o primeiro número"
           onChange={capturandoPrimeiroValor}
           autoFocus
+          autoComplete="off"
         />
         <S.Input
           type="text"
@@ -115,6 +116,7 @@ export default function App() {
           value={segundoValor}
           placeholder="Digite o segundo número"
           onChange={capturandoSegundoValor}
+          autoComplete="off"
         />
       </S.ConteinerInput>
       <S.ConteinerButton>
