@@ -18,7 +18,7 @@ export default function App() {
       (caracteres) => !isNaN(caracteres) && caracteres !== ""
     );
 
-    // //condicional para verificar se tem número, e, se sim, juntá-los e convertê-los em números para as operações aritméticas.
+    //condicional para verificar se tem número, e, se sim, juntá-los e convertê-los em números para as operações aritméticas.
     const valorFiltrado = ehNumero.length > 0 ? Number(ehNumero.join("")) : "";
 
     setValor(valorFiltrado);
@@ -67,11 +67,14 @@ export default function App() {
 
   //verficação do segundo valor, caso contrário qualquer número dividido por 0 dá como resultado Infinity
   const divisao = () => {
-    if (validarEntradas()) {
-      const resultadoDivisao = Number(primeiroValor) / Number(segundoValor);
-      segundoValor === 0
-        ? (alert("Não é possível dividir por 0."), handleClear())
-        : setResultado(String(resultadoDivisao));
+    if (segundoValor === 0) {
+      alert("Não é possível dividir por 0.");
+      handleClear();
+    } else {
+      if (validarEntradas()) {
+        const resultadoDivisao = Number(primeiroValor) / Number(segundoValor);
+        setResultado(String(resultadoDivisao));
+      }
     }
   };
 
